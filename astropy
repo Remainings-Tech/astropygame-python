@@ -1,0 +1,29 @@
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+from astropy.io import fits
+
+from astropy.utils.data import download_file
+
+from astropy.visualization import LogStretch, PowerStretch
+
+from astropy.visualization.mpl_normalize import ImageNormalize
+
+image_file = download_file('https://fits.gsfc.nasa.gov/samples/UITfuv2582gc.fits', cache=True)
+
+image_data = fits.getdata(image_file)
+
+import pprint
+header = fits.getheader(image_file)
+pprint.pprint(header)
+
+print('Min:', np.min(image_data))
+print('Max:', np.max(image_data))
+print('Mean:', np.mean(image_data))
+print('Stdev:', np.min(image_data))
+
+plt.figure(figsize=(10,10))
+plt.imshow(image_data, cmap="Pastel2")
+plt.colorbar()
+plt.show()
